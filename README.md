@@ -39,7 +39,7 @@
 <summary style="cursor: pointer">미리보기</summary>
 <div markdown="1" style="text-align:center">
 
-![차량등록](https://github.com/doowon13/Car-culator/assets/83566946/ccc32cdc-ac24-4384-ba11-9db8dd3c6f18)
+![AI차량등록](https://github.com/doowon13/Car-culator/assets/83566946/6ebd9a64-afb2-4c86-bf29-55c69b176005)
 <br>
 </div>
 </details>
