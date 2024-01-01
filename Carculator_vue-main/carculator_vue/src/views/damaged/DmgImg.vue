@@ -44,11 +44,11 @@ const breadcrumbs = [
               </VCol>
 
               <VCol cols="12">
-                <VTextField v-model="car_damaged" placeholder="파손정보" label="차량 파손정보" :readonly="true" />
+                <VTextField v-model="car_damaged" placeholder="파손정보" label="차량 파손정보" :readonly="false" />
               </VCol>
 
               <VCol cols="12">
-                <VTextField v-model="rep_Cost" placeholder="예상 정비금액" label="예상 정비금액" :readonly="true" />
+                <VTextField v-model="rep_Cost" placeholder="예상 정비금액" label="예상 정비금액" :readonly="false" />
               </VCol>
 
               <VCol cols="12">

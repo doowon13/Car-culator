@@ -4,6 +4,11 @@
 
 ![image](https://github.com/doowon13/Car-culator/assets/83566946/bd1fe9d4-3273-490b-81a6-39cd534ae6a3)
 
+## 프로젝트 포트폴리오
+### [ 포트폴리오 링크  ](https://www.canva.com/design/DAF4ntzBCwg/g1QsskCNtJSf3rMiwx3INw/view?utm_content=DAF4ntzBCwg&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel) ← Click!
+
+
+
 ## 프로젝트 기능
 
 ### 🛡 JWT, OAuth2 소셜로그인 (Kakao, Naver, Google, Git)
@@ -88,6 +93,7 @@
 </details>
 
 <br>
+<hr style="text-align:center; width:45%;">
 <br>
 
 ## Back-End 사용기술
