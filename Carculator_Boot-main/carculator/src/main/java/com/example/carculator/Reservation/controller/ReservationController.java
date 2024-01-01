@@ -27,7 +27,6 @@ public class ReservationController {
     // 내 정비소에 들어온 예약 전부 조회 : Custom
     @GetMapping("/reservations/{repairshop_code}")
     public ResponseEntity<List<ReservationDto>> getReceivedReservList(@PathVariable(name = "repairshop_code") Long repairshop_code) throws Exception {
-        System.out.println("\n\n\n\n\n\n\n컨트롤러 도착은 하네?\n" + repairshop_code);
         List<ReservationDto> list
                 = reservationService.getReceivedReservList(repairshop_code);
         log.info("\n\n" + list);
