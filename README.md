@@ -2,6 +2,8 @@
 
 ### [ 이미지 분석 AI 기반 차량관리 플랫폼 ](https://www.car-culator.com/)
 
+![image](https://github.com/doowon13/Car-culator/assets/83566946/bd1fe9d4-3273-490b-81a6-39cd534ae6a3)
+
 ## 프로젝트 기능
 
 ### 🛡 JWT, OAuth2 소셜로그인 (Kakao, Naver, Google, Git)
@@ -17,7 +19,7 @@
 <summary style="cursor: pointer">미리보기</summary>
 <div markdown="1">
 
-![지도](https://github.com/doowon13/Car-culator/assets/83566946/8433c8a0-b3ec-4d02-804e-7e1b16c68293)
+![image](https://github.com/doowon13/Car-culator/assets/83566946/9bbb9fb9-3227-4aca-a70c-bdcd5749c0f6)
 <br>
 </div>
 </details>
@@ -30,9 +32,9 @@
 
 <details>
 <summary style="cursor: pointer">미리보기</summary>
-<div markdown="1">
+<div markdown="1" style="text-align:center">
 
-![마이페이지](https://github.com/doowon13/Car-culator/assets/83566946/8433c8a0-b3ec-4d02-804e-7e1b16c68293)
+![차량등록](https://github.com/doowon13/Car-culator/assets/83566946/ccc32cdc-ac24-4384-ba11-9db8dd3c6f18)
 <br>
 </div>
 </details>
@@ -46,7 +48,9 @@
 <summary style="cursor: pointer">미리보기</summary>
 <div markdown="1">
 
-![쇼핑몰](https://github.com/doowon13/Car-culator/assets/83566946/8433c8a0-b3ec-4d02-804e-7e1b16c68293)
+![KakaoTalk_20240101_123901545](https://github.com/doowon13/Car-culator/assets/83566946/6a7bd773-bbe9-404e-98fc-27dd9b39c6dc)
+![KakaoTalk_20240101_124119704](https://github.com/doowon13/Car-culator/assets/83566946/531d2aaf-99ad-4a71-957d-84df37a34232)
+![KakaoTalk_20240101_124152869](https://github.com/doowon13/Car-culator/assets/83566946/040ce4c3-48c3-4e26-862e-cbdddece71e3)
 <br>
 </div>
 </details>
@@ -58,7 +62,7 @@
 <summary style="cursor: pointer">미리보기</summary>
 <div markdown="1">
 
-![AI 견적서비스](https://github.com/doowon13/Car-culator/assets/83566946/8433c8a0-b3ec-4d02-804e-7e1b16c68293)
+![image](https://github.com/doowon13/Car-culator/assets/83566946/a2c13785-0034-4dc6-8dac-f0a664f8bd30)
 <br>
 </div>
 </details>
@@ -70,9 +74,15 @@
 
 <details>
 <summary style="cursor: pointer">미리보기</summary>
+<br>
 <div markdown="1">
+<strong>일반 유저의 예약</strong>
 
-![차량 정비예약시스템](https://github.com/doowon13/Car-culator/assets/83566946/8433c8a0-b3ec-4d02-804e-7e1b16c68293)
+![image](https://github.com/doowon13/Car-culator/assets/83566946/d6d4b01f-ba75-48db-a7a4-40e2f308090a)
+![image](https://github.com/doowon13/Car-culator/assets/83566946/a3ede7ed-4a1a-41b1-9bb2-6b7a6973e18e)
+
+<strong>정비소 유저의 예약관리</strong>
+![image](https://github.com/doowon13/Car-culator/assets/83566946/6e26e2b6-455f-452b-b6a7-760951bf0b96)
 <br>
 </div>
 </details>
