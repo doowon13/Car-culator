@@ -97,7 +97,7 @@
 <br>
 
 ## Back-End 사용기술
-`SpringBoot` `JPA` `QueryDSL` `JPQL` `JWT` `Gradle` `Oracle DB`
+`Java` `SpringBoot (MVC model 2)` `JPA` `QueryDSL` `JPQL` `JWT` `Gradle` `Python` `Oracle DB`
 
 ## Front-End 사용기술
 `Vue.js & Vuetify` `Axios` `TypeScript` `JavaScript` `Node.js`
