@@ -1,6 +1,6 @@
 package com.example.carculator.member.model.repository;
 
-import com.example.carculator.RepairShop.Entity.QRepairShop;
+import com.example.carculator.repairshop.entity.QRepairShop;
 import com.example.carculator.member.dto.MemberDto;
 import com.example.carculator.member.model.entity.QMember;
 import com.querydsl.core.Tuple;

@@ -1,26 +1,19 @@
 package com.example.carculator.member.controller;
 
-import com.example.carculator.Shop.Entity.Product;
-import com.example.carculator.commons.FileUplode;
 import com.example.carculator.login.model.AccountService;
 import com.example.carculator.member.dto.MemberDto;
 import com.example.carculator.member.model.entity.Member;
 import com.example.carculator.member.model.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Objects;
 
 
 @Slf4j

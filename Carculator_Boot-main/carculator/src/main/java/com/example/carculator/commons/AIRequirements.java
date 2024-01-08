@@ -22,7 +22,8 @@ public class AIRequirements {
         String imagePath = uploadPath + renameFileName;
 
         // Python AI Project가 있는 경로지정 (환경에 따라 수정 필요)
-        String workingDir = "G:\\ICT_Backup\\IntelliJ_workspace\\YOLOv8_Project";
+        String workingDir = "D:\\(1. Java_workspace)\\carculator\\YOLOv8_Project";
+//        String workingDir = "..\\..\\..\\..\\..\\..\\..\\..\\..\\YOLOv8_Project";
         // Project 내부 실행코드가 들어있는 파일위치 경로 (환경에 따라 수정 필요)
         String carAiPy = workingDir + File.separator + "run.py";
         // Python Project 내부의 실행기 위치 (수정 불필요)
