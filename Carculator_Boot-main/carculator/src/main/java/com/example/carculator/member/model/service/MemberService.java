@@ -1,7 +1,7 @@
 package com.example.carculator.member.model.service;
 
-import com.example.carculator.RepairShop.Entity.RepairShop;
-import com.example.carculator.RepairShop.Repository.RepairShopRepository;
+import com.example.carculator.repairshop.entity.RepairShop;
+import com.example.carculator.repairshop.repository.RepairShopRepository;
 import com.example.carculator.member.dto.MemberDto;
 import com.example.carculator.member.model.entity.Member;
 import com.example.carculator.member.model.repository.MemberRepository;

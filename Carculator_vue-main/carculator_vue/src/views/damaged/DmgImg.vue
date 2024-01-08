@@ -66,6 +66,17 @@ const breadcrumbs = [
       </VCard>
     </VCol>
   </VRow>
+  <VCol>
+    <div style="display: flex; justify-content: center">
+      <div
+        class="d-flex align-center gap-4 flex-wrap"
+      style="margin-top: 20px; align-self: flex-start"
+      >
+      <VProgressCircular indeterminate color="info"
+      v-if="processing"/>
+      </div>
+    </div>
+  </VCol>
 </template>
 
 <script>
@@ -82,6 +93,7 @@ export default {
       previewImg2: null,
       damageStr: "",
       totalcost: 0,
+      processing: false,
     };
   },
   methods: {
@@ -105,6 +117,7 @@ export default {
     async searchDamagedCar() {
     console.log("searchDamagedCar 함수 진입!");
     alert("차량 파손정보 조회를 시작합니다.\n5초정도 소요됩니다. 잠시만 기다려주세요.");
+    this.processing = true;
     const formData = new FormData();
     formData.append("carImg", this.previewImg2);
     try {
@@ -115,6 +128,7 @@ export default {
         });
         console.log(response.data);
         alert("차량 파손정보 조회가 완료되었습니다.");
+        this.processing = false;
         if (response.data.trim() === "") {
             this.car_damaged = "손상정보 없음";
             this.rep_Cost = "예상 수리금액 : " + this.totalcost + "원";
@@ -124,6 +138,9 @@ export default {
         let dmgcount = 0;
         let dmg_category = "";
         const spdata = response.data.split(", ");
+
+        console.log("\n\n" + spdata);
+
         for (let i = 0; i < spdata.length; i++) {
             const sdata = spdata[i].split(" ");
             for (let j = 0; j < sdata.length; j++) {
