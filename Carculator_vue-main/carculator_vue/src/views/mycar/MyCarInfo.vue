@@ -1,7 +1,6 @@
 <script setup>
-import { onMounted, ref } from "vue";
-// import { userRouter } from "vue-router";
 import axios from "axios";
+import { onMounted, ref } from "vue";
 
 let membercode = null;
 
@@ -265,7 +264,7 @@ export default {
       }
     },
     changePassword() {
-      this.$router.push("/changePassword");
+      this.$router.push("/check-password");
     },
   },
 };

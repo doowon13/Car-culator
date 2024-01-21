@@ -102,6 +102,16 @@ public class AccountService {
         }
     }
 
+    public void checkCurrentPwd(MemberDto memberDto) throws Exception {
+        //비밀번호 확인
+        Member memberEntity = memberRepository.findById(memberDto.getMembercode())
+                .orElseThrow(() -> new NotFoundException("회원을 찾을 수 없습니다."));
+
+        if (!bCryptPasswordEncoder.matches(memberDto.getPwd(), memberEntity.getPwd())) {
+            throw new BadCredentialsException("비밀번호가 맞지 않습니다.");
+        }
+    }
+
     public UserResponseDto defaultLogin(LoginRequestDto loginRequestDto, HttpServletResponse res) {
 
         try {

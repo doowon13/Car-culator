@@ -4,10 +4,24 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 
 let membercode = null;
-const car_id = ref(0);
 
-const items = [
+const car_id = ref(0);
+const role = sessionStorage.getItem("userRole");
+const currentUserData = ref([]);
+
+const normalUser = [
   { text: "이름", value: "", icon: "mdi-account-outline" },
+  { text: "이메일", value: "" },
+  { text: "연락처", value: "" },
+  { text: "성별", value: "" },
+  { text: "생년월일", value: "" },
+];
+
+const shopUser = [
+  { text: "사업장명", value: "" },
+  { text: "사업장 주소", value: "" },
+  { text: "사업장 전화번호", value: "" },
+  { text: "사업주명", value: "", icon: "mdi-account-outline" },
   { text: "이메일", value: "" },
   { text: "연락처", value: "" },
   { text: "성별", value: "" },
@@ -27,23 +41,12 @@ onMounted(async () => {
   await fetchMyCar();
 });
 
-const formatPhoneNumber = (phoneNumber) => {
-  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{3})(\d{3,4})(\d{4})$/);
-
-  if (match) {
-    return match[1] + '-' + match[2] + '-' + match[3];
-  }
-
-  return phoneNumber;
-};
-
 const formatBitrhData = (birthDate) => {
-  const cleaned = ('' + birthDate).replace(/\D/g, '');
+  const cleaned = ("" + birthDate).replace(/\D/g, "");
   const match = cleaned.match(/^(\d{4})(\d{2})(\d{2})$/);
 
   if (match) {
-    return match[1] + '년 ' + match[2] + '월 ' + match[3] + '일';
+    return match[1] + "년 " + match[2] + "월 " + match[3] + "일";
   }
 
   return birthDate;
@@ -54,15 +57,31 @@ const fetchMyInfo = async () => {
     const res = await axios.get("http://localhost:8888/member/" + membercode);
     const userData = await res.data;
 
-    items[0].value = userData.name;
-    items[1].value = userData.email;
-    const originalPhone = userData.phone;
-    const formattedPhone = formatPhoneNumber(originalPhone);
-    items[2].value = formattedPhone;
-    items[3].value = userData.gender;
     const originalBirth = userData.birth;
     const formattedBirth = formatBitrhData(originalBirth);
-    items[4].value = formattedBirth;
+
+    // 일반유저 정보 매핑
+    normalUser[0].value = userData.name;
+    normalUser[1].value = userData.email;
+    normalUser[2].value = userData.phone;
+    normalUser[3].value = userData.gender;
+    normalUser[4].value = formattedBirth;
+
+    // 정비소유저 정보 매핑
+    shopUser[0].value = userData.shopname;
+    shopUser[1].value = userData.shopaddress;
+    shopUser[2].value = userData.shopphone;
+    shopUser[3].value = userData.name;
+    shopUser[4].value = userData.email;
+    shopUser[5].value = userData.phone;
+    shopUser[6].value = userData.gender;
+    shopUser[7].value = formattedBirth;
+
+    if (userData.grade === "ROLE_USER") {
+      currentUserData.value = normalUser;
+    } else if (userData.grade === "ROLE_SHOP") {
+      currentUserData.value = shopUser;
+    }
 
     document.querySelector(".userItem:nth-child(1)").click();
     document.querySelector(".userItem:nth-child(1)").click();
@@ -94,103 +113,164 @@ const fetchMyCar = async () => {
 
 
 <template>
-<VDivider />
-  <VList>
-    <VListItem :prepend-avatar="avatar1" title="나의 정보" subtitle="">
-      <template #append>
-        <VBtn size="small" variant="text" icon="mdi-menu-down" />
-      </template>
-    </VListItem>
-  </VList>
+  <VCard>
+    <div class="wrapper" style="display: flex; justify-content: center">
+      <div style="width: 50%; align-self: flex-start">
+        <VDivider />
+        <VList>
+          <VListItem :prepend-avatar="avatar1" title="나의 정보" subtitle="">
+            <template #append> </template>
+          </VListItem>
+        </VList>
 
-  <VDivider />
+        <VDivider />
 
-  <VList :lines="false" density="compact" nav>
-    <VListItem
-      v-for="(item, i) in items"
-      :key="i"
-      :value="item"
-      color="primary"
-      class="userItem"
-    >
-      <template #prepend>
-        <VIcon :icon="item.icon" />
-      </template>
+        <VList :lines="false" density="compact" nav>
+          <VListItem
+            v-for="(item, i) in currentUserData"
+            :key="i"
+            :value="item"
+            color="primary"
+            class="userItem"
+          >
+            <template #prepend>
+              <VIcon :icon="item.icon" />
+            </template>
 
-      <VListItemTitle> {{ item.text }} : {{ item.value }} </VListItemTitle>
-    </VListItem>
-    <div class="buttonWrapper" style="text-align: center">
-      <VBtn
-        @click="this.$router.push('/')"
-        color="success"
-        variant="tonal"
-        style="margin-top: 10px; margin-bottom: 5px; margin-right: 5px"
-      >
-        &nbsp;&nbsp;홈으로&nbsp;&nbsp;
-      </VBtn>
-      <VBtn
-        @click="changePassword"
-        color="error"
-        variant="tonal"
-        style="margin-top: 10px; margin-bottom: 5px; margin-left: 5px"
-      >
-        비밀번호 변경
-      </VBtn>
-    </div>
-  </VList>
+            <VListItemTitle>
+              {{ item.text }} : {{ item.value }}
+            </VListItemTitle>
+          </VListItem>
+          <div class="buttonWrapper" style="text-align: center">
+            <VBtn
+              v-if="role === 'ROLE_SHOP'"
+              @click="modifyShopInfo"
+              color="success"
+              variant="outlined"
+              style="margin-top: 10px; margin-bottom: 5px; margin-right: 5px"
+            >
+              정비소 정보수정
+            </VBtn>
 
-  <VDivider />
+            <VBtn
+              @click="changePassword"
+              color="success"
+              variant="outlined"
+              style="margin-top: 10px; margin-bottom: 5px; margin-left: 5px"
+            >
+              비밀번호 변경
+            </VBtn>
+          </div>
+        </VList>
 
-  <VList>
-    <VListItem title="나의 차량정보">
-      <template #append>
-        <VBtn size="small" variant="text" icon="mdi-menu-down" />
-      </template>
-    </VListItem>
-  </VList>
+        <VDivider />
 
-  <VDivider />
+        <VList>
+          <VListItem title="나의 차량정보">
+            <template #append> </template>
+          </VListItem>
+        </VList>
 
-  <VList :lines="false" density="compact" nav>
-    <VListItem
-      v-for="(item, i) in mycar"
-      :key="i"
-      :value="item"
-      color="primary"
-      class="mycarItem"
-    >
-      <template #prepend>
-        <VIcon :icon="item.icon" />
-      </template>
+        <VDivider />
 
-      <VListItemTitle> {{ item.text }} : {{ item.value }} </VListItemTitle>
-    </VListItem>
-    <div class="buttonsContainer">
-      <div class="buttons" style="text-align: center">
-        <VBtn
-          @click="$router.push('/mycarWrite')"
-          color="success"
-          variant="tonal"
-          style="margin-bottom: 10px; margin-top: 10px; margin-right: 5px"
-        >
-          차량등록
-        </VBtn>
-        <VBtn
-          @click="deleteMyCar"
-          color="error"
-          variant="tonal"
-          style="margin-bottom: 10px; margin-top: 10px; margin-left: 5px"
-        >
-          차량삭제
-        </VBtn>
+        <VList :lines="false" density="compact" nav>
+          <VListItem
+            v-for="(item, i) in mycar"
+            :key="i"
+            :value="item"
+            color="primary"
+            class="mycarItem"
+          >
+            <template #prepend>
+              <VIcon :icon="item.icon" />
+            </template>
+
+            <VListItemTitle>
+              {{ item.text }} : {{ item.value }}
+            </VListItemTitle>
+          </VListItem>
+          <div class="buttonsContainer">
+            <div class="buttons" style="text-align: center">
+              <VBtn
+                @click="$router.push('/mycarWrite')"
+                color="success"
+                variant="outlined"
+                style="margin-bottom: 10px; margin-top: 10px; margin-right: 5px"
+              >
+                차량등록
+              </VBtn>
+              <VBtn
+                @click="deleteMyCar"
+                color="error"
+                variant="outlined"
+                style="margin-bottom: 10px; margin-top: 10px; margin-left: 5px"
+              >
+                차량삭제
+              </VBtn>
+            </div>
+          </div>
+        </VList>
+        <div>
+          <div style="text-align: center">
+            <VBtn
+              @click="$router.push('/main')"
+              color="success"
+              variant="tonal"
+              style="margin-top: 10px; margin-bottom: 15px; width: 150px; height: 40px"
+            >
+              홈으로
+            </VBtn>
+          </div>
+        </div>
       </div>
     </div>
-  </VList>
+  </VCard>
+  
+  <!-- <VDialog
+    v-model="dialog"
+    max-width="500px"
+  >
+    <VTextField
+      v-model="currentPassword"
+      label="현재 비밀번호"
+    />
+    <VBtn
+      color="success"
+      @click="changePassword"
+    >
+    확인
+    </VBtn>
+    <VBtn
+      color="error"
+      @click="close()"
+    >
+    취소
+    </VBtn>
+  </VDialog> -->
+
+<div class="modal">
+  <h2>현재 비밀번호를 입력해주세요.</h2>
+  <VBtn
+    color="success"
+    @click="changePassword"
+  />
+</div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      member: {
+        membercode: "",
+        currentPassword: "",
+      }
+    };
+  },
   methods: {
+    modifyShopInfo() {
+      this.$router.push("/modifyInfo_shop");
+    },
     movePage() {
       this.$router.push("/main");
     },
@@ -222,7 +302,10 @@ export default {
         }
       }
     },
-    changePassword() {
+    async changePassword() {
+      this.membercode = sessionStorage.getItem("memberCode");
+      console.log("\nmembercode : " + this.membercode + "\ncurrentPw : " + this.currentPassword);
+      const response = await axios.get("http://localhost:8888/member/" + membercode)
       this.$router.push("/changePassword");
     },
   },
