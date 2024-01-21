@@ -54,21 +54,6 @@ public class MemberController {
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
-    // 비밀번호 변경
-    @PatchMapping("/member")
-    public ResponseEntity<?> updatePassword(@RequestBody MemberDto memberDto) throws Exception {
-        try {
-            // 현재 비밀번호와 같은 비밀번호라면 Exception
-            accountService.checkFormerPwd(memberDto);
-            // 위 코드를 통과했다면 서비스 호출
-            memberService.updatePassword(memberDto);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-
     // 코드로 상태 변경
     @PostMapping("/member/status")
     public ResponseEntity<?> updateStatus(@RequestBody String membercode) throws  Exception {
@@ -109,5 +94,31 @@ public class MemberController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
          return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 비밀번호 변경
+    @PatchMapping("/member")
+    public ResponseEntity<?> updatePassword(@RequestBody MemberDto memberDto) throws Exception {
+        try {
+            // 현재 비밀번호와 같은 비밀번호라면 Exception
+            accountService.checkFormerPwd(memberDto);
+            // 위 코드를 통과했다면 서비스 호출
+            memberService.updatePassword(memberDto);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 비밀번호 변경페이지 비밀번호 확인
+    @PostMapping("/member/check-pw")
+    public ResponseEntity<?> checkPwd(@RequestBody MemberDto memberDto) throws Exception {
+        log.info("\n\n\nController here.\nmembercode : " + memberDto.getMembercode() + "\npassword : " + memberDto.getPwd());
+        try {
+            accountService.checkCurrentPwd(memberDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -321,6 +321,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/check-password',
+      name: 'check-password',
+      component: () => import('@/views/mycar/CheckingPw.vue'),
+      meta: {
+        layout: 'content',
+      }
+    },
+    {
       path: '/noticeWrite',
       name: 'noticeWrite1',
       component: () => import('@/views/notice/noticeWrite.vue'),

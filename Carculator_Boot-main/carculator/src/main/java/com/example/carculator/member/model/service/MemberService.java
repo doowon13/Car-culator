@@ -150,7 +150,11 @@ public class MemberService {
             log.info("비밀번호 변경 오류");
         }
     }
-
+    // 비밀번호 확인
+    @Transactional
+    public void checkPwd(MemberDto memberDto) {
+        String cryptedPwd = bCryptPasswordEncoder.encode(memberDto.getPwd());
+    }
 
     // 정비소 회원의 정비소 정보 변경
     public void modifyShopInfo(MemberDto memberDto) throws Exception {
